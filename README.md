@@ -26,13 +26,14 @@ The app integrates **Stripe** for secure payments, **Cloudinary** for image stor
 
 ---
 
-## 🎥 Demo
+## 🎥 Demo  
 
-- 🔴 **Live Demo:** [Live Demo](https://food-flow-livid.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/View%20Live-Vercel-blue?style=for-the-badge&logo=vercel)](https://food-flow-livid.vercel.app/)
 
-- 📼 **Recorded Demo:** [Recorded Demo](https://www.linkedin.com/posts/activity-7386867957064155136-ktGH?utm_source=share&utm_medium=member_android&rcm=ACoAAD-hKsAB1QXZ1eSyBx8nGWP48RuYiBX5Bdg)
+[![Recorded Demo](https://img.shields.io/badge/Watch%20Demo-LinkedIn-green?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/posts/activity-7386867957064155136-ktGH?utm_source=share&utm_medium=member_android&rcm=ACoAAD-hKsAB1QXZ1eSyBx8nGWP48RuYiBX5Bdg)
 
 ---
+
 
 ## 👤 User Features
 
