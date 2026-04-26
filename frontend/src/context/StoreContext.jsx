@@ -1,179 +1,133 @@
-import { createContext, useEffect, useState } from "react";
-import { food_list } from "../assets/assets";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const StoreContext = createContext(null);
 
+export const menu_list = [
+  { menu_name: "salad",    menu_image: "/menu_1.png" },
+  { menu_name: "Rolls",    menu_image: "/menu_2.png" },
+  { menu_name: "Deserts",  menu_image: "/menu_3.png" },
+  { menu_name: "Sandwich", menu_image: "/menu_4.png" },
+  { menu_name: "Cake",     menu_image: "/menu_5.png" },
+  { menu_name: "Pure-Veg", menu_image: "/menu_6.png" },
+  { menu_name: "Pasta",    menu_image: "/menu_7.png" },
+  { menu_name: "Noodles",  menu_image: "/menu_8.png" },
+];
+
+const URL = "http://localhost:4000";
+
 export const StoreContextProvider = ({ children }) => {
-  const url = import.meta.env.VITE_BACKEND_URL;
-
-  // console.log(url);
-
-  const [cartItems, setCartItems] = useState({});
-  const [token, setToken] = useState("");
-  const [data, setData] = useState([]);
-  const [userData, setUserData] = useState({});
+  const [cartItems, setCartItems]   = useState({});
+  const [token, setToken]           = useState("");
+  const [data, setData]             = useState([]);
+  const [userData, setUserData]     = useState({});
   const [foodLoading, setFoodLoading] = useState(false);
-  // --------------------------- clinet --------------------------------
+  const [favorites, setFavorites]   = useState([]);
+
+  const url = URL;
+
   const addToCart = async (itemId) => {
-    if (!cartItems[itemId]) {
-      setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
-    } else {
-      setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-    }
-    console.log("itemId added:", itemId);
-
+    setCartItems(p => ({ ...p, [itemId]: (p[itemId] || 0) + 1 }));
     if (token) {
-      await addToCartServer(itemId);
+      try {
+        await axios.post(`${url}/api/cart/add`, { itemId }, { headers: { token } });
+        await fetchCardData();
+      } catch(e) { console.log(e); }
     }
   };
+
   const removeFromCart = async (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-    console.log("itemId removed:", itemId);
-
+    setCartItems(p => ({ ...p, [itemId]: p[itemId] - 1 }));
     if (token) {
-      await removeFromCartServer(itemId);
+      try {
+        await axios.put(`${url}/api/cart/remove`, { itemId }, { headers: { token } });
+        await fetchCardData();
+      } catch(e) { console.log(e); }
     }
   };
+
   const cartTotal = () => {
-    let totalAmount = 0;
-    if (cartItems) {
-      for (const item in cartItems) {
-        if (cartItems[item] > 0) {
-          let itemInfo = data.find((i) => i._id === item);
-          totalAmount += itemInfo.price * cartItems[item];
-        }
+    let total = 0;
+    for (const id in cartItems) {
+      if (cartItems[id] > 0) {
+        const item = data.find(i => i._id === id);
+        if (item) total += item.price * cartItems[id];
       }
-      return totalAmount;
     }
+    return total;
   };
 
-  // --------------------------- clinet --------------------------------
-
-  // --------------------------- server --------------------------------
   const getFoods = async () => {
     try {
       setFoodLoading(true);
-      let myResponse = await axios.get(`${url}/api/food/get`, {
-        headers: {
-          "ngrok-skip-browser-warning": "true",
-        },
-      });
-      // console.log(myResponse.data.food);
-      setData(myResponse.data.food);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setFoodLoading(false);
-    }
-  };
-
-  const addToCartServer = async (itemId) => {
-    try {
-      let myResponse = await axios.post(
-        `${url}/api/cart/add`,
-        { itemId },
-        {
-          headers: {
-            token: token,
-            "ngrok-skip-browser-warning": "true",
-          },
-        },
-      );
-      await fetchCardData();
-      // console.log(myResponse.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const removeFromCartServer = async (itemId) => {
-    try {
-      let myResponse = await axios.put(
-        `${url}/api/cart/remove`,
-        { itemId },
-        {
-          headers: {
-            token: token,
-            "ngrok-skip-browser-warning": "true",
-          },
-        },
-      );
-      await fetchCardData();
-      // console.log(myResponse.data);
-    } catch (error) {
-      console.log(error);
-    }
+      const res = await axios.get(`${url}/api/food/get`);
+      setData(res.data.food);
+    } catch(e) { console.log(e); }
+    finally { setFoodLoading(false); }
   };
 
   const fetchCardData = async () => {
     try {
-      let myResponse = await axios.get(`${url}/api/cart/get`, {
-        headers: {
-          token: token,
-          "ngrok-skip-browser-warning": "true",
-        },
-      });
-      // console.log("cart items ", myResponse.data.userCart);
-      setCartItems(myResponse?.data?.userCart);
-      // console.log("cart ", cartItems);
-    } catch (error) {
-      console.log(error);
-    }
+      const res = await axios.get(`${url}/api/cart/get`, { headers: { token } });
+      setCartItems(res?.data?.userCart || {});
+    } catch(e) { console.log(e); }
   };
-  // --------------------------- server --------------------------------
 
   const fetchUserData = async () => {
     try {
-      let myResponse = await axios(`${url}/api/auth/user-data`, {
-        headers: { token, "ngrok-skip-browser-warning": "true" },
-      });
-      setUserData(myResponse.data.user);
+      const res = await axios.get(`${url}/api/auth/user-data`, { headers: { token } });
+      setUserData(res.data.user);
+    } catch(e) { console.log(e); }
+  };
 
-      // console.log(myResponse.data.user);
-    } catch (error) {
-      console.log(error);
+  const fetchFavorites = async () => {
+    try {
+      const res = await axios.get(`${url}/api/favorites/get`, { headers: { token } });
+      setFavorites(res.data.favorites || []);
+    } catch(e) { console.log(e); }
+  };
+
+  const addToFavorites = async (itemId) => {
+    setFavorites(p => [...p, itemId]);
+    if (token) {
+      try { await axios.post(`${url}/api/favorites/add`, { itemId }, { headers: { token } }); }
+      catch(e) { console.log(e); }
     }
   };
 
-  const contextValue = {
-    food_list,
-    addToCart,
-    removeFromCart,
-    cartItems,
-    setCartItems,
-    cartTotal,
-    url,
-    token,
-    setToken,
-    data,
-    setData,
-    addToCartServer,
-    removeFromCartServer,
-    userData,
-    fetchUserData,
-    foodLoading,
+  const removeFromFavorites = async (itemId) => {
+    setFavorites(p => p.filter(id => id !== itemId));
+    if (token) {
+      try { await axios.delete(`${url}/api/favorites/remove`, { data: { itemId }, headers: { token } }); }
+      catch(e) { console.log(e); }
+    }
   };
 
+  const isFavorite = (itemId) => favorites.includes(itemId);
+
+  useEffect(() => { getFoods(); }, []);
+
   useEffect(() => {
-    getFoods();
+    const saved = localStorage.getItem("food_flow_token");
+    if (saved) setToken(saved);
   }, []);
 
   useEffect(() => {
-    if (localStorage.getItem("food_flow_token")) {
-      setToken(localStorage.getItem("food_flow_token"));
-      fetchCardData();
-      fetchUserData();
-    }
-    // console.log("token ", token);
+    if (token) { fetchCardData(); fetchUserData(); fetchFavorites(); }
   }, [token]);
 
   return (
-    <StoreContext.Provider value={contextValue}>
+    <StoreContext.Provider value={{
+      url, cartItems, setCartItems, token, setToken,
+      data, setData, userData, fetchUserData,
+      addToCart, removeFromCart, cartTotal, foodLoading,
+      menu_list,
+      favorites, addToFavorites, removeFromFavorites, isFavorite,
+    }}>
       {children}
     </StoreContext.Provider>
   );
 };
 
+export const useStore = () => useContext(StoreContext);
 export default StoreContextProvider;

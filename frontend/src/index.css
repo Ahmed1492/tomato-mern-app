@@ -1,104 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 @import "tailwindcss";
 
-* {
-  scroll-behavior: smooth;
+* { font-family: "Poppins", sans-serif; }
+html { 
+  scroll-behavior: smooth; 
+  scroll-padding-top: 80px; /* Account for fixed navbar */
 }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#ff6b6b,#ee5a6f); border-radius: 10px; }
+
 .bg-header {
-  /* width: 100%; */
-  /* height: 74vh; */
-  background: linear-gradient(
-      to left,
-      rgb(189, 48, 23),
-      transparent,
-      transparent,
-      rgb(189, 48, 23)
-    ),
-    url(/src/assets/header_img.png);
-  background-repeat: no-repeat;
-  background-position: center 124%;
-
-  background-size: cover;
-  border-radius: 22px;
-  margin-top: 1rem;
-  color: #fff;
+  background: linear-gradient(135deg,rgba(255,107,107,.95) 0%,rgba(238,90,111,.9) 30%,rgba(255,107,107,.95) 100%), url(/header_img.png);
+  background-repeat: no-repeat; background-position: center; background-size: cover;
+  border-radius: 32px; color: #fff; box-shadow: 0 25px 80px rgba(255,107,107,.4); overflow: hidden;
 }
 
-.bg-header div {
-  animation: fadeIn, 3s;
-  -webkit-animation: fadeIn 2.1s;
-}
-.hide-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-.fadeIn {
-  animation: fadeIn 1s;
+.gradient-text {
+  background: linear-gradient(135deg,#ff6b6b 0%,#ee5a6f 50%,#ff8e8e 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 
-.bg-black-light {
-  background-color: rgba(0, 0, 0, 0.5);
+.btn-primary {
+  background: linear-gradient(135deg,#ff6b6b 0%,#ee5a6f 100%);
+  transition: all .4s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 6px 20px rgba(255,107,107,.4);
+  position: relative; overflow: hidden;
 }
+.btn-primary::before {
+  content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
+  background: linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent); transition: left .5s;
+}
+.btn-primary:hover::before { left:100%; }
+.btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 35px rgba(255,107,107,.5); }
+.btn-primary:active { transform: translateY(-1px) scale(.98); }
 
-#food-display {
-  animation: fadeIn 2s;
-}
+.hide-scrollbar { -ms-overflow-style:none; scrollbar-width:none; }
+.hide-scrollbar::-webkit-scrollbar { display:none; }
+
+.line-clamp-2 { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+
+.fadeIn  { animation: fadeIn  .8s ease-out; }
+.fadeInUp { animation: fadeInUp 1s ease-out; }
+.fadeInLeft { animation: fadeInLeft .8s ease-out; }
+.fadeInRight { animation: fadeInRight .8s ease-out; }
+.slideInLeft { animation: slideInLeft .8s ease-out; }
+.scaleIn { animation: scaleIn .6s ease-out; }
+.float-animation { animation: float 6s ease-in-out infinite; }
+.phone-float { animation: phoneFloat 4s ease-in-out infinite; }
+
 .spinner {
-  width: 100px;
-  height: 100px;
-  place-self: center;
-  border: 5px solid #bdbdbd;
-  border-top-color: tomato;
-  border-radius: 50%;
-  animation: rotate 1s infinite;
-}
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+  width:60px; height:60px; border:4px solid #f3f3f3;
+  border-top:4px solid #ff6b6b; border-radius:50%;
+  animation: rotate 1s linear infinite;
 }
 
-@keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-  }
+.skeleton {
+  background: linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);
+  background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius:.75rem;
 }
 
-@media (max-width: 700px) {
-  .bg-header {
-    /* display: none; */
-    /* background-position: center !important; */
-    background-position: unset !important;
-  }
-}
-
-.shimmer {
-  position: relative;
-  overflow: hidden;
-  background: #e2e8f0;
-}
-
-.shimmer::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -150%;
-  height: 100%;
-  width: 150%;
-  background: linear-gradient(
-    to right,
-    transparent,
-    rgba(255, 255, 255, 0.4),
-    transparent
-  );
-  animation: shimmer 1.5s infinite;
-  -webkit-animation: shimmer 1.5s infinite;
-}
-
-@keyframes shimmer {
-  100% {
-    left: 100%;
-  }
-}
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeInLeft { from{opacity:0;transform:translateX(-50px)} to{opacity:1;transform:translateX(0)} }
+@keyframes fadeInRight { from{opacity:0;transform:translateX(50px)} to{opacity:1;transform:translateX(0)} }
+@keyframes slideInLeft { from{opacity:0;transform:translateX(-100px) rotate(-5deg)} to{opacity:1;transform:translateX(0) rotate(0)} }
+@keyframes scaleIn { from{opacity:0;transform:scale(.8)} to{opacity:1;transform:scale(1)} }
+@keyframes float { 0%,100%{transform:translateY(0) rotate(0)} 33%{transform:translateY(-20px) rotate(3deg)} 66%{transform:translateY(-10px) rotate(-2deg)} }
+@keyframes phoneFloat { 0%,100%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-10px) rotate(1deg)} }
+@keyframes rotate { 100%{transform:rotate(360deg)} }
+@keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }

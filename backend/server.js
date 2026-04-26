@@ -5,27 +5,23 @@ import foodRouter from './src/router/food.router.js';
 import userRouter from './src/router/user.router.js';
 import cartRouter from './src/router/cart.router.js';
 import orderRouter from './src/router/order.router.js';
+import favoritesRouter from './src/router/favorites.router.js';
 import connectCloudinary from './src/config/cloudinary.js';
-// import serverless from 'serverless-http';
 import "dotenv/config";
 
 const app = express();
 
-// middleware
 app.use(express.json());
 app.use(cors());
 
-// routes
 app.use('/api/food', foodRouter);
 app.use('/api/auth', userRouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/order', orderRouter);
+app.use('/api/favorites', favoritesRouter);
 
-app.get('/', (req, res) => {
-  res.send('Hello World! api works ');
-});
+app.get('/', (req, res) => res.send('Food Flow API is running ✅'));
 
-// ✅ Wrap connections in async function
 const startConnections = async () => {
   try {
     await connectDB();
@@ -35,13 +31,7 @@ const startConnections = async () => {
     console.error("Connection Error:", err);
   }
 };
-startConnections(); // do NOT await at top-level
+startConnections();
 
-// ✅ EXPORT HANDLER FOR VERCEL
-// export const handler = serverless(app);
-
-
-const port = 4000;
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+const port = process.env.PORT || 4000;
+app.listen(port, () => console.log(`Server running on http://localhost:${port}`));

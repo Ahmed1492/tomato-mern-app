@@ -1,58 +1,27 @@
-import React, { useState } from "react";
-import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
-import AddItems from "./pages/Add-Items";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+import AddItems from "./pages/Add-Items";
 import ListItems from "./pages/List-Items";
 import Orders from "./pages/Orders";
-import { ToastContainer } from "react-toastify";
 
-const App = () => {
-  const url = "http://localhost:4000";
+const URL = "http://localhost:4000";
 
-  const [currenPage, setCurrentPage] = useState("add-items");
-
-  return (
-    <div className="pb-7">
-      <ToastContainer />
-      <Navbar />
-      <div className="flex gap-7 w-full">
-        <Sidebar currenPage={currenPage} setCurrentPage={setCurrentPage} />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <AddItems
-                url={url}
-                currenPage={currenPage}
-                setCurrentPage={setCurrentPage}
-              />
-            }
-          />
-          <Route
-            path="/list"
-            element={
-              <ListItems
-                url={url}
-                urrenPage={currenPage}
-                setCurrentPage={setCurrentPage}
-              />
-            }
-          />
-          <Route
-            path="/orders"
-            element={
-              <Orders
-                url={url}
-                urrenPage={currenPage}
-                setCurrentPage={setCurrentPage}
-              />
-            }
-          />
-        </Routes>
-      </div>
+const App = () => (
+  <div className="min-h-screen bg-gray-50">
+    <ToastContainer position="top-right" autoClose={2500} />
+    <Navbar />
+    <div className="flex">
+      <Sidebar />
+      <Routes>
+        <Route path="/"       element={<AddItems  url={URL} />} />
+        <Route path="/list"   element={<ListItems url={URL} />} />
+        <Route path="/orders" element={<Orders    url={URL} />} />
+      </Routes>
     </div>
-  );
-};
+  </div>
+);
 
 export default App;
