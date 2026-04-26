@@ -74,3 +74,56 @@ The app integrates **Stripe** for secure payments, **Cloudinary** for image stor
 - **Admins:**  
   - View all orders  
   - Update the status of any order  
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 👨‍💻 Author
+
+**Ahmed Mohamed**
+
+- GitHub: [@AhmedMohamed](https://github.com/AhmedMohamed)
+- LinkedIn: [Ahmed Mohamed](https://linkedin.com/in/ahmed-mohamed)
+- Portfolio: [ahmed-mohamed.dev](https://ahmed-mohamed.dev)
+
+## © Copyright
+
+© 2024 Ahmed Mohamed. All Rights Reserved.
+
+This project was created by Ahmed Mohamed as a comprehensive full-stack food delivery application demonstration showcasing both MERN stack and Next.js implementations.
+
+---
+
+## 🙏 Acknowledgments
+
+- **React & Next.js Teams** for the amazing frameworks
+- **MongoDB Team** for the flexible database
+- **Stripe Team** for secure payment processing
+- **Cloudinary Team** for image management services
+- **Express.js Team** for the excellent web framework
+- **Tailwind CSS** for the utility-first CSS framework
+
+---
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## ⭐ Show Your Support
+
+Give a ⭐️ if this project helped you!
+
+---
+
+**Made with ❤️ by Ahmed Mohamed**

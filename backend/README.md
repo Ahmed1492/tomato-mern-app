@@ -5,6 +5,7 @@ A robust backend API for the food delivery application built with Node.js, Expre
 ## 🚀 Features
 
 ### 🔐 **Authentication & Authorization**
+
 - **JWT-based Authentication** with secure token generation
 - **Password Hashing** using bcrypt
 - **Protected Routes** with middleware validation
@@ -13,6 +14,7 @@ A robust backend API for the food delivery application built with Node.js, Expre
 - **User Profile Management** with image uploads
 
 ### 🥘 **Food Management**
+
 - **CRUD Operations** for food items
 - **Image Upload** integration with Cloudinary
 - **Category Management** for food organization
@@ -21,6 +23,7 @@ A robust backend API for the food delivery application built with Node.js, Expre
 - **Admin-only Operations** for food management
 
 ### 🛒 **Cart System**
+
 - **Persistent Cart** storage per user
 - **Add/Remove Items** with quantity management
 - **Cart Synchronization** across devices
@@ -28,12 +31,14 @@ A robust backend API for the food delivery application built with Node.js, Expre
 - **Automatic Cart Cleanup** for inactive users
 
 ### 💖 **Favorites System**
+
 - **User Favorites** management
 - **Add/Remove Favorites** functionality
 - **Persistent Storage** across sessions
 - **Quick Access** to preferred items
 
 ### 📦 **Order Management**
+
 - **Order Creation** with detailed information
 - **Order Status Tracking** (Processing, Out for Delivery, Delivered, Cancelled)
 - **Order History** for users and admins
@@ -42,6 +47,7 @@ A robust backend API for the food delivery application built with Node.js, Expre
 - **Order Analytics** and reporting
 
 ### 💳 **Payment Integration**
+
 - **Stripe Payment Processing** for secure transactions
 - **Webhook Handling** for payment verification
 - **Multiple Payment Methods** support
@@ -50,6 +56,7 @@ A robust backend API for the food delivery application built with Node.js, Expre
 - **Transaction History** and receipts
 
 ### 📁 **File Management**
+
 - **Cloudinary Integration** for image storage
 - **Image Upload** with validation and optimization
 - **Multiple File Formats** support
@@ -110,6 +117,7 @@ backend/
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js (v16 or higher)
 - MongoDB (local or cloud instance)
 - Stripe account for payments
@@ -118,18 +126,21 @@ backend/
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd backend
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Environment Setup**
    Create a `.env` file in the backend directory:
+
    ```env
    # Database
    MONGODB_URI=mongodb://localhost:27017/food-delivery
@@ -153,6 +164,7 @@ backend/
    ```
 
 4. **Start the server**
+
    ```bash
    # Development mode with nodemon
    npm run dev
@@ -172,7 +184,9 @@ backend/
 ### **Authentication Routes** (`/api/auth`)
 
 #### **POST** `/register`
+
 Register a new user account
+
 ```json
 {
   "name": "John Doe",
@@ -182,7 +196,9 @@ Register a new user account
 ```
 
 #### **POST** `/login`
+
 Authenticate user and get JWT token
+
 ```json
 {
   "email": "john@example.com",
@@ -191,46 +207,63 @@ Authenticate user and get JWT token
 ```
 
 #### **GET** `/user-data`
+
 Get authenticated user's profile data
+
 - **Headers**: `Authorization: Bearer <token>`
 
 ### **Food Routes** (`/api/food`)
 
 #### **GET** `/get`
+
 Get all food items with optional filtering
+
 - **Query Parameters**: `category`, `search`, `page`, `limit`
 
 #### **POST** `/add` (Admin Only)
+
 Add a new food item
+
 - **Headers**: `Authorization: Bearer <admin-token>`
 - **Body**: Multipart form data with image file
 
 #### **DELETE** `/remove` (Admin Only)
+
 Remove a food item
+
 - **Headers**: `Authorization: Bearer <admin-token>`
 - **Body**: `{ "id": "food-item-id" }`
 
 ### **Cart Routes** (`/api/cart`)
 
 #### **GET** `/get`
+
 Get user's cart items
+
 - **Headers**: `Authorization: Bearer <token>`
 
 #### **POST** `/add`
+
 Add item to cart
+
 - **Headers**: `Authorization: Bearer <token>`
 - **Body**: `{ "itemId": "food-item-id" }`
 
 #### **PUT** `/remove`
+
 Remove item from cart
+
 - **Headers**: `Authorization: Bearer <token>`
 - **Body**: `{ "itemId": "food-item-id" }`
 
 ### **Order Routes** (`/api/order`)
 
 #### **POST** `/place`
+
 Place a new order
+
 - **Headers**: `Authorization: Bearer <token>`
+
 ```json
 {
   "address": {
@@ -258,20 +291,28 @@ Place a new order
 ```
 
 #### **GET** `/user-orders`
+
 Get user's order history
+
 - **Headers**: `Authorization: Bearer <token>`
 
 #### **GET** `/list` (Admin Only)
+
 Get all orders for admin management
+
 - **Headers**: `Authorization: Bearer <admin-token>`
 
 #### **POST** `/status` (Admin Only)
+
 Update order status
+
 - **Headers**: `Authorization: Bearer <admin-token>`
 - **Body**: `{ "orderId": "order-id", "status": "Out for Delivery" }`
 
 #### **POST** `/verify`
+
 Verify payment and update order status
+
 ```json
 {
   "orderId": "order-id",
@@ -282,22 +323,29 @@ Verify payment and update order status
 ### **Favorites Routes** (`/api/favorites`)
 
 #### **GET** `/get`
+
 Get user's favorite items
+
 - **Headers**: `Authorization: Bearer <token>`
 
 #### **POST** `/add`
+
 Add item to favorites
+
 - **Headers**: `Authorization: Bearer <token>`
 - **Body**: `{ "itemId": "food-item-id" }`
 
 #### **DELETE** `/remove`
+
 Remove item from favorites
+
 - **Headers**: `Authorization: Bearer <token>`
 - **Body**: `{ "itemId": "food-item-id" }`
 
 ## 🗄️ Database Models
 
 ### **User Model**
+
 ```javascript
 {
   name: String (required),
@@ -312,6 +360,7 @@ Remove item from favorites
 ```
 
 ### **Food Model**
+
 ```javascript
 {
   name: String (required),
@@ -326,6 +375,7 @@ Remove item from favorites
 ```
 
 ### **Order Model**
+
 ```javascript
 {
   userId: ObjectId (ref: 'User'),
@@ -356,6 +406,7 @@ Remove item from favorites
 ```
 
 ### **Cart Model**
+
 ```javascript
 {
   userId: ObjectId (ref: 'User'),
@@ -371,18 +422,21 @@ Remove item from favorites
 ## 🔒 Security Features
 
 ### **Authentication Security**
+
 - **JWT Tokens** with expiration
 - **Password Hashing** with bcrypt (10 rounds)
 - **Protected Routes** with middleware validation
 - **Token Blacklisting** for logout functionality
 
 ### **Data Validation**
+
 - **Input Sanitization** for all endpoints
 - **Schema Validation** with Mongoose
 - **File Upload Validation** (type, size limits)
 - **Email Format Validation**
 
 ### **API Security**
+
 - **CORS Configuration** for cross-origin requests
 - **Rate Limiting** to prevent abuse
 - **Request Size Limits** for file uploads
@@ -391,12 +445,14 @@ Remove item from favorites
 ## 💳 Payment Processing
 
 ### **Stripe Integration**
+
 - **Secure Payment Processing** with Stripe API
 - **Webhook Handling** for payment verification
 - **Test Mode** for development
 - **Production Ready** configuration
 
 ### **Payment Flow**
+
 1. **Order Creation** with pending payment status
 2. **Stripe Session** creation for secure checkout
 3. **Payment Processing** on Stripe's secure servers
@@ -406,6 +462,7 @@ Remove item from favorites
 ## 📁 File Upload System
 
 ### **Cloudinary Integration**
+
 - **Secure Image Storage** in the cloud
 - **Automatic Optimization** for web delivery
 - **Multiple Format Support** (JPEG, PNG, WebP)
@@ -413,6 +470,7 @@ Remove item from favorites
 - **CDN Delivery** for fast loading
 
 ### **Upload Process**
+
 1. **File Validation** (type, size, format)
 2. **Multer Processing** for multipart data
 3. **Cloudinary Upload** with optimization
@@ -422,13 +480,16 @@ Remove item from favorites
 ## 🚀 Deployment
 
 ### **Environment Configuration**
+
 - **Production Environment Variables**
 - **Database Connection** (MongoDB Atlas recommended)
 - **Stripe Live Keys** for production payments
 - **Cloudinary Production** configuration
 
 ### **Vercel Deployment**
+
 The project includes `vercel.json` for easy deployment:
+
 ```json
 {
   "version": 2,
@@ -448,6 +509,7 @@ The project includes `vercel.json` for easy deployment:
 ```
 
 ### **Deployment Steps**
+
 1. **Environment Setup** in deployment platform
 2. **Database Migration** to production
 3. **Stripe Webhook** configuration
@@ -457,12 +519,14 @@ The project includes `vercel.json` for easy deployment:
 ## 📊 Monitoring & Analytics
 
 ### **Logging**
+
 - **Request Logging** for API calls
 - **Error Logging** with stack traces
 - **Performance Monitoring** for slow queries
 - **Security Event Logging**
 
 ### **Health Checks**
+
 - **Database Connection** monitoring
 - **External Service** availability checks
 - **Memory Usage** tracking
@@ -471,12 +535,14 @@ The project includes `vercel.json` for easy deployment:
 ## 🧪 Testing
 
 ### **Test Categories**
+
 - **Unit Tests** for individual functions
 - **Integration Tests** for API endpoints
 - **Authentication Tests** for security
 - **Database Tests** for data integrity
 
 ### **Test Setup**
+
 ```bash
 # Install test dependencies
 npm install --save-dev jest supertest
@@ -497,9 +563,28 @@ npm test
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
+## 👨‍💻 Author
+
+**Ahmed Mohamed**
+
+- GitHub: [@AhmedMohamed](https://github.com/ahmed1492)
+- LinkedIn: [Ahmed Mohamed](https://www.linkedin.com/in/ahmed-mohamed-8a8619259/)
+
+## © Copyright
+
+© 2024 Ahmed Mohamed. All Rights Reserved.
+
+This project was created by Ahmed Mohamed as a full-stack food delivery application demonstration.
+
+---
+
 ## 🙏 Acknowledgments
 
 - **Express.js Team** for the excellent web framework
 - **MongoDB Team** for the flexible database
 - **Stripe Team** for secure payment processing
 - **Cloudinary Team** for image management services
+
+---
+
+**Made with ❤️ by Ahmed Mohamed**

@@ -69,9 +69,14 @@ const Footer = () => {
 
       <div className="relative z-10 mt-12">
         <div className="w-[90%] mx-auto h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent"></div>
-        <p className="text-center text-sm text-gray-400 mt-6">
-          Copyright © 2025 Tomato.com - All Rights Reserved. Made with ❤️
-        </p>
+        <div className="text-center mt-6 space-y-2">
+          <p className="text-sm text-gray-400">
+            © 2024 Ahmed Mohamed. All Rights Reserved.
+          </p>
+          <p className="text-xs text-gray-500">
+            Made with ❤️ by <span className="text-[#ff6b6b] font-semibold">Ahmed Mohamed</span>
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ A modern, responsive frontend for the food delivery application built with React
 ## 🚀 Features
 
 ### 🏠 **Home Page**
+
 - **Hero Section** with animated elements and statistics
 - **Food Categories** with interactive menu navigation
 - **Top Dishes** display with pagination
@@ -13,12 +14,14 @@ A modern, responsive frontend for the food delivery application built with React
 - **Modern Footer** with gradient background and social links
 
 ### 🔐 **Authentication**
+
 - **Login/Register Modal** with form validation
 - **JWT Token Management** with localStorage persistence
 - **Protected Routes** for authenticated users
 - **User Profile** management with avatar upload
 
 ### 🛒 **Shopping Experience**
+
 - **Food Display** with category filtering and pagination
 - **Food Cards** with modern design, favorites, and quick view
 - **Add to Cart** functionality with quantity management
@@ -26,6 +29,7 @@ A modern, responsive frontend for the food delivery application built with React
 - **Search Functionality** across all food items
 
 ### 🛍️ **Cart & Checkout**
+
 - **Modern Cart Page** with item management
 - **Promo Code System** for discounts
 - **Order Summary** with detailed pricing
@@ -33,6 +37,7 @@ A modern, responsive frontend for the food delivery application built with React
 - **Delivery Information** form with validation
 
 ### 📦 **Order Management**
+
 - **My Orders Page** with sophisticated design matching Next.js version
 - **Statistics Cards** showing Total Spent, Processing, Delivered, Cancelled orders
 - **Order Timeline** with visual progress indicators
@@ -46,6 +51,7 @@ A modern, responsive frontend for the food delivery application built with React
 - **Real-time Order Status** updates
 
 ### 🎨 **UI/UX Features**
+
 - **Responsive Design** for all screen sizes
 - **Skeleton Loading** for better user experience
 - **Smooth Animations** and hover effects
@@ -118,6 +124,7 @@ frontend/
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js (v16 or higher)
 - npm or yarn
 - Backend server running on port 4000
@@ -125,28 +132,33 @@ frontend/
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd frontend
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Environment Setup**
    Create a `.env` file in the frontend directory:
+
    ```env
    VITE_BACKEND_URL=http://localhost:4000
    ```
 
 4. **Start development server**
+
    ```bash
    npm run dev
    ```
 
 5. **Build for production**
+
    ```bash
    npm run build
    ```
@@ -166,6 +178,7 @@ frontend/
 ## 🎨 Styling & Design
 
 ### **Design System**
+
 - **Primary Color**: #ff6b6b (Tomato red)
 - **Secondary Colors**: Purple, Green, Orange gradients
 - **Typography**: Poppins font family
@@ -173,11 +186,13 @@ frontend/
 - **Animations**: Smooth transitions and hover effects
 
 ### **Responsive Breakpoints**
+
 - **Mobile**: < 768px
 - **Tablet**: 768px - 1024px
 - **Desktop**: > 1024px
 
 ### **Key Design Features**
+
 - **Gradient Backgrounds** for visual appeal
 - **Rounded Corners** (12px, 16px, 24px)
 - **Shadow Layers** for depth
@@ -189,26 +204,31 @@ frontend/
 The frontend communicates with the backend through RESTful APIs:
 
 ### **Authentication Endpoints**
+
 - `POST /api/auth/register` - User registration
 - `POST /api/auth/login` - User login
 - `GET /api/auth/user-data` - Get user profile
 
 ### **Food Endpoints**
+
 - `GET /api/food/get` - Get all food items
 - `POST /api/food/add` - Add new food item (admin)
 - `DELETE /api/food/remove` - Remove food item (admin)
 
 ### **Cart Endpoints**
+
 - `GET /api/cart/get` - Get user cart
 - `POST /api/cart/add` - Add item to cart
 - `PUT /api/cart/remove` - Remove item from cart
 
 ### **Order Endpoints**
+
 - `POST /api/order/place` - Place new order
 - `GET /api/order/user-orders` - Get user orders
 - `POST /api/order/verify` - Verify payment
 
 ### **Favorites Endpoints**
+
 - `GET /api/favorites/get` - Get user favorites
 - `POST /api/favorites/add` - Add to favorites
 - `DELETE /api/favorites/remove` - Remove from favorites
@@ -243,6 +263,7 @@ The frontend communicates with the backend through RESTful APIs:
 The React frontend has been carefully crafted to match the Next.js version exactly:
 
 ### **MyOrders Page**
+
 - ✅ **Statistics Cards** with gradient backgrounds
 - ✅ **Order Timeline** with visual progress indicators
 - ✅ **Filter Tabs** (All, Food Processing, Out for Delivery, etc.)
@@ -252,11 +273,13 @@ The React frontend has been carefully crafted to match the Next.js version exact
 - ✅ **Skeleton Loading** for all components
 
 ### **Cart Page**
+
 - ✅ **Modern Design** with promo codes and order summary
 - ✅ **Item Management** with quantity controls
 - ✅ **Price Calculations** with taxes and delivery fees
 
 ### **Checkout Process**
+
 - ✅ **Multi-Step Form** with progress indicators
 - ✅ **Address Validation** and form handling
 - ✅ **Payment Integration** with Stripe
@@ -274,9 +297,28 @@ The React frontend has been carefully crafted to match the Next.js version exact
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
+## 👨‍💻 Author
+
+**Ahmed Mohamed**
+
+- GitHub: [@AhmedMohamed](https://github.com/ahmed1492)
+- LinkedIn: [Ahmed Mohamed](https://www.linkedin.com/in/ahmed-mohamed-8a8619259/)
+
+## © Copyright
+
+© 2024 Ahmed Mohamed. All Rights Reserved.
+
+This project was created by Ahmed Mohamed as a full-stack food delivery application demonstration.
+
+---
+
 ## 🙏 Acknowledgments
 
 - **React Team** for the amazing framework
 - **Vite Team** for the fast build tool
 - **Tailwind CSS** for the utility-first CSS framework
 - **Food Images** from various sources for demonstration
+
+---
+
+**Made with ❤️ by Ahmed Mohamed**
